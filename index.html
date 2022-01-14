@@ -108,13 +108,13 @@
 </head>
 
 <body>
-    <h1 class="text">Bạn có muốn tạch môn này không không?</h1>
+    <h1 class="text">Bạn có muốn tạch môn cháu ngoan bác hồ này không ?</h1>
     <button id="yes" onclick="clickYes()">Có chứ, học lại cho chắc</button>
     <button id="no" onmouseover="hoverNo()">KHÔNG</button>
 
 
     <canvas id="c"></canvas>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         // geting canvas by id c
         var hoverNo = function() {
@@ -125,7 +125,7 @@
             btn.style.left = left;
         }
         var clickYes = function() {
-            alert("CHUẨN CMNR HỌC LẠI ĐI=>>");
+            swal("Tạch tạch tạch tạch");
         }
         var c = document.getElementById("c");
 

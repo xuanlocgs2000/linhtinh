@@ -1,0 +1,233 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Bạn có muốn tạch môn?</title>
+
+</head>
+<style>
+	#yes{
+		position: absolute;
+		left: 300px;
+		width: 200px;
+	}
+	#no{
+		position: absolute;
+		
+		left: 100px;
+		width: 100px;
+	}
+</style>
+<body>
+	<script>
+		var hoverNo=function(){
+			var btn = document.getElementById("no");
+			var top = Math.floor(Math.random()*400);
+			var left = Math.floor(Math.random()*800);
+			btn.style.top = top;
+			btn.style.left = left;
+		}
+		var clickYes= function(){
+			alert("CHUẨN CMNR HỌC LẠI ĐI=>>");
+		}
+	</script>
+	<h1>Bạn có muốn tạch không?</h1>
+	<button id="yes" onclick="clickYes()">Có chứ, học lại cho chắc</button>
+	<button id="no" onmouseover="hoverNo()">KHÔNG</button>
+
+</body>
+</html> -->
+<html>
+
+<head>
+
+    <style>
+        /*basic reset */
+        
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background: black;
+        }
+        
+        canvas {
+            display: block;
+        }
+        
+        #yes {
+            position: absolute;
+            left: 900px;
+            width: 200px;
+            top: 300px;
+            color: #fff !important;
+            text-transform: uppercase;
+            text-decoration: none;
+            background: #ed3330;
+            padding: 20px;
+            border-radius: 5px;
+            display: inline-block;
+            border: none;
+            transition: all 0.4s ease 0s;
+        }
+        
+        #yes:hover {
+            color: #ffffff !important;
+            background: #f6b93b;
+            border-color: #f6b93b !important;
+            transition: all 0.4s ease 0s;
+            cursor: pointer;
+        }
+        
+        #no {
+            position: absolute;
+            left: 300px;
+            width: 100px;
+            top: 300px;
+            color: #494949 !important;
+            text-transform: uppercase;
+            text-decoration: none;
+            background: #ffffff;
+            padding: 20px;
+            border: 4px solid #494949 !important;
+            display: inline-block;
+            transition: all 0.4s ease 0s;
+            cursor: pointer;
+        }
+        
+        .text {
+            text-align: center;
+            color: white;
+            top: 200px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1 class="text">Bạn có muốn tạch môn này không không?</h1>
+    <button id="yes" onclick="clickYes()">Có chứ, học lại cho chắc</button>
+    <button id="no" onmouseover="hoverNo()">KHÔNG</button>
+
+
+    <canvas id="c"></canvas>
+
+    <script>
+        // geting canvas by id c
+        var hoverNo = function() {
+            var btn = document.getElementById("no");
+            var top = Math.floor(Math.random() * 400);
+            var left = Math.floor(Math.random() * 800);
+            btn.style.top = top;
+            btn.style.left = left;
+        }
+        var clickYes = function() {
+            alert("CHUẨN CMNR HỌC LẠI ĐI=>>");
+        }
+        var c = document.getElementById("c");
+
+        var ctx = c.getContext("2d");
+
+
+
+        //making the canvas full screen
+
+        c.height = window.innerHeight;
+
+        c.width = window.innerWidth;
+
+
+
+        //chinese characters - taken from the unicode charset
+
+        var matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()<>€£¥[]{}+=-~「」[]《《》》【】∥／／＼＼۞ᚙ᳀爼�۝₻₪゜༺《︽︾》္ౖ༘࿆̐֟឴ᢆᬼ҉⃠︀҈ೋြ︴﹎Ω",
+
+            //converting the string into an array of single characters
+
+            matrix = matrix.split("");
+
+
+
+        var font_size = 10;
+
+        var columns = c.width / font_size; //number of columns for the rain
+
+        //an array of drops - one per column
+
+        var drops = [];
+
+        //x below is the x coordinate
+
+        //1 = y co-ordinate of the drop(same for every drop initially)
+
+        for (var x = 0; x < columns; x++)
+
+            drops[x] = 30;
+
+
+
+        //drawing the characters
+
+        function draw()
+
+        {
+
+            //Black BG for the canvas
+
+            //translucent BG to show trail
+
+            ctx.fillStyle = "rgba(0, 0, 0, 0.14)";
+
+            ctx.fillRect(0, 0, c.width, c.height);
+
+
+
+            ctx.fillStyle = "#0f0"; //green text
+
+            ctx.font = font_size + "px arial";
+
+            //looping over drops
+
+            for (var i = 0; i < drops.length; i++)
+
+            {
+
+                //a random character to print
+
+                var text = matrix[Math.floor(Math.random() * matrix.length)];
+
+                //x = i*font_size, y = value of drops[i]*font_size
+
+                ctx.fillText(text, i * font_size, drops[i] * font_size);
+
+
+
+                //sending the drop back to the top randomly after it has crossed the screen
+
+                //adding a randomness to the reset to make the drops scattered on the Y axis
+
+                if (drops[i] * font_size > c.height && Math.random() > 0.975)
+
+                    drops[i] = 0;
+
+
+
+                //incrementing Y coordinate
+
+                drops[i]++;
+
+            }
+
+        }
+
+
+
+        setInterval(draw, 30);
+    </script>
+
+</body>
+
+</html>
